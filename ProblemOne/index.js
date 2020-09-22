@@ -56,7 +56,22 @@ var arr = [
 ];
 
 function mutateArray(a) {
-    return a;
+    output = a.map(guest=>{
+        guestOutput = flattenObject({...guest});
+        return guestOutput;
+    });
+    return output;
+}
+
+function flattenObject(obj){
+    return Object.fromEntries(getEntries(obj));
+}
+
+function getEntries(obj){
+    return Object.entries(obj).flatMap(([key, value]) => 
+    //If value is an object but not an array, recurse to get its entries
+    (typeof value === 'object' && !Array.isArray(value))  ? getEntries(value) : [[ key,value ]]
+  );
 }
 
 $(document).ready(function() {
