@@ -56,7 +56,8 @@ var arr = [
 ];
 
 function mutateArray(a) {
-    output = a.map(guest=>{
+    filtered = a.filter(val=> val.guest_type === 'guest');
+    output = filtered.map(guest=>{
         guestOutput = flattenObject({...guest});
         guestOutput.some_total = guestOutput.some_array?.reduce((acc, val)=> acc+val);
         delete guestOutput.some_array;
