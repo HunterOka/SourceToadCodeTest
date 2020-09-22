@@ -63,6 +63,7 @@ function mutateArray(a) {
         delete guestOutput.some_array;
         return guestOutput;
     });
+    output.sort((a,b)=> (a.last_name+a.first_name).localeCompare(b.last_name+b.first_name))
     return output;
 }
 
