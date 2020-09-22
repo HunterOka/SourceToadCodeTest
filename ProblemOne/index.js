@@ -58,6 +58,8 @@ var arr = [
 function mutateArray(a) {
     output = a.map(guest=>{
         guestOutput = flattenObject({...guest});
+        guestOutput.some_total = guestOutput.some_array?.reduce((acc, val)=> acc+val);
+        delete guestOutput.some_array;
         return guestOutput;
     });
     return output;
