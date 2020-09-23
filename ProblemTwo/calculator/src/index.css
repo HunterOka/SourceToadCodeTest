@@ -7,11 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 .container {
     margin: auto;
     max-width: 750px;
@@ -26,13 +21,20 @@ code {
     text-align: center;
     font-size: 60px;
     font-weight: 100;
+    background-color: #d5d6d8;
+    color: black;
 }
 
 .numberPad{
     width: 100%;
 }
 
-.bg-grey{
-    background-color: #d5d6d8;
-    color: black;
+.operatorButton{
+    background-color: darkorange;
+    color: white;
+}
+
+.display{
+    font-size: 90px;
+    color:white;
 }

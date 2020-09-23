@@ -10,7 +10,7 @@ function Button(props){
 
 Button.propTypes = {
     className: PropTypes.string,
-    onclick: PropTypes.func,
+    onClick: PropTypes.func,
     display: PropTypes.string,
 }
 

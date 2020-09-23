@@ -9,44 +9,55 @@ function NumberPad(props){
         <div className='buttonRow'>
             <Button display='1'
                 className={props.buttonClass}
-                onclick={()=>props.buttonClick(1)}
+                onClick={()=>props.buttonClick(1)}
                 />
             <Button display='2'
                 className={props.buttonClass}
-                onclick={()=>props.buttonClick(2)}
+                onClick={()=>props.buttonClick(2)}
                 />
             <Button display='3'
                 className={props.buttonClass}
-                onclick={()=>props.buttonClick(3)}
+                onClick={()=>props.buttonClick(3)}
                 />
         </div>
         <div className='buttonRow'>
             <Button display='4'
                 className={props.buttonClass}
-                onclick={()=>props.buttonClick(4)}
+                onClick={()=>props.buttonClick(4)}
                 />
             <Button display='5'
                 className={props.buttonClass}
-                onclick={()=>props.buttonClick(5)}
+                onClick={()=>props.buttonClick(5)}
                 />
             <Button display='6'
                 className={props.buttonClass}
-                onclick={()=>props.buttonClick(6)}
+                onClick={()=>props.buttonClick(6)}
                 />
         </div>
         <div className='buttonRow'>
             <Button display='7'
                 className={props.buttonClass}
-                onclick={()=>props.buttonClick(7)}
+                onClick={()=>props.buttonClick(7)}
                 />
             <Button display='8'
                 className={props.buttonClass}
-                onclick={()=>props.buttonClick(8)}
+                onClick={()=>props.buttonClick(8)}
                 />
             <Button display='9'
                 className={props.buttonClass}
-                onclick={()=>props.buttonClick(9)}
+                onClick={()=>props.buttonClick(9)}
                 />
+        </div>
+        <div className='buttonRow'>
+            <Button display='0'
+                className={props.buttonClass}
+                onClick={()=>props.buttonClick(0)}
+                />
+            <Button display='.'
+                className={props.buttonClass}
+                onClick={()=>props.buttonClick('.')}
+                />
+            
         </div>
     </div>
 }
