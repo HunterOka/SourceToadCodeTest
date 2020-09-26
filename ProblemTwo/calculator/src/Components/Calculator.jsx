@@ -13,15 +13,17 @@ function Calculator(props) {
     const MAXDIGITS=12;
     
     //Store the active number as a string for easy concatenation
-    const [activeValue, setActiveValue] = React.useState("0");
+    const [activeValue, setActiveValue] = React.useState('0');
     //Store the sign of the active number separately, so it does not count against digit length
     const [isNegative, setIsNegative] = React.useState(false);    
     //Keep the stored number as a number
     const [storedNumber, setStoredNumber] =  React.useState(null);
-    
+    //Store the intended operation
     const [operator, setOperator] =  React.useState(null);
+    //Tracks if we are at the start of a new input after completeing an operation
     const [newInput, setNewInput] =  React.useState(false);
-    const [shouldClear, setShouldClear] =  React.useState(false);
+    //Tracks if the last operation complete was '='
+    const [calcComplete, setCalcComplete] =  React.useState(false);
     
     const addDigit = (digit) => {
         if (activeValue.includes('e') || activeValue.length >= MAXDIGITS){
@@ -33,9 +35,8 @@ function Calculator(props) {
             return
         }
         
-        if(shouldClear) {
+        if(calcComplete) {//The last thing hit was '=', clear all the stored values.
             clear();
-            setShouldClear(false);
         }
         
         if (activeValue === '0' || newInput){
@@ -44,42 +45,49 @@ function Calculator(props) {
             setActiveValue(activeValue+digit);     
         }
         
+        setCalcComplete(false);
+        setNewInput(false);
     }
     
-    const calculate = () => {
-        let result;
-        let numberValue = getActiveNumber()
-        
+    const calculate = (a, b, operator) => {
         //Execute the function associated with the operation 
-        result = getOperation(operator)(numberValue, storedNumber);
-        
+        let result = getOperation(operator)(a, b);
         result = roundToMax(result)
-        setIsNegative(result < 0)
-        setActiveValue(Math.abs(result).toString())
-        return result
-        
+        return result 
     }
     
-    const resolveOperator = (operator) => {
-        let calculation;
-        setShouldClear(false);
-        if(operator == operators.EQUAL) {
+    const resolveOperator = (newOperator) => {
+        let result;
+        setCalcComplete(false);//If we pressed an operation, we want to keep calculating
+        if(newOperator == operators.EQUAL) {
             if(storedNumber !== null){
-                calculate();
-                setStoredNumber(getActiveNumber());
-                setShouldClear(true);
+                if (!calcComplete){
+                    result = calculate(storedNumber, getActiveNumber(), operator);
+                    setStoredNumber(getActiveNumber());//The first time '=' is pressed, store the active number for iterating '='
+                } else {
+                //If we are iterating over '=', we need to calculate the stored number on the active number
+                 result = calculate(getActiveNumber(), storedNumber, operator);
+                }
+                handleResult(result);
+                setCalcComplete(true);
             }
         } else {
             if(!newInput && storedNumber !== null){
-                calculation = calculate();
-                setStoredNumber(calculation);
+                result = calculate(storedNumber, getActiveNumber(), operator);
+                handleResult(result);
+                setStoredNumber(result);
             } else {
                 setStoredNumber(getActiveNumber())
             }
-         setOperator(operator)
+         setOperator(newOperator)
          
         }
         setNewInput(true)
+    }
+    
+    const handleResult = (result) => {
+        setIsNegative(result < 0)
+        setActiveValue(Math.abs(result).toString())
     }
     
     const clear = () => {
@@ -87,7 +95,8 @@ function Calculator(props) {
         setIsNegative(false);
         setOperator(null);
         setStoredNumber(null);
-        setNewInput(false)
+        setNewInput(false);
+        setCalcComplete(false);
     }
     
     const invert = () => {
@@ -95,9 +104,8 @@ function Calculator(props) {
     }
     
     const percent = () => {
-        let activeNumberAbs = parseFloat(activeValue)
-        let newValue = roundToMax(activeNumberAbs / 100)
-        setActiveValue(newValue.toString());
+        let newValue = roundToMax(getActiveNumber() / 100)
+        handleResult(newValue);
     }
     
     const getActiveNumber = () => {
@@ -109,8 +117,7 @@ function Calculator(props) {
     }
     
     const getDisplayValue = ()=>{
-        return  (isNegative ? '-':'') + activeValue;
-        
+        return  (isNegative ? '-':'') + activeValue;  
     }
     
     return <div>
