@@ -50,7 +50,7 @@ function NumberPad(props){
         </div>
         <div className='buttonRow'>
             <Button display='0'
-                className={props.buttonClass}
+                className={'wideButton'}
                 onClick={()=>props.buttonClick(0)}
                 />
             <Button display='.'

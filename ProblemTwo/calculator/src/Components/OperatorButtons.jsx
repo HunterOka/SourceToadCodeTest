@@ -2,27 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Button from './Button.jsx'
-import {operators} from './../constants.js'
+import {operators} from './../operations.js'
 
 function OperatorButtons(props){
 
     return <div className='operatorButtons'>
         <div className='buttonCol'>
-            <Button display='+'
+             <Button display='÷'
                 className='operatorButton'
-                onClick={()=>props.buttonClick(operators.ADD)}
+                onClick={()=>props.buttonClick(operators.DIVIDE)}
                 />
-            <Button display='-'
-                className='operatorButton'
-                onClick={()=>props.buttonClick(operators.SUBTRACT)}
-                />
-            <Button display='x'
+            <Button display='×'
                 className='operatorButton'
                 onClick={()=>props.buttonClick(operators.MULTIPLY)}
                 />
-            <Button display='/'
+            <Button display='−'
                 className='operatorButton'
-                onClick={()=>props.buttonClick(operators.DIVIDE)}
+                onClick={()=>props.buttonClick(operators.SUBTRACT)}
+                />
+            <Button display='+'
+                className='operatorButton'
+                onClick={()=>props.buttonClick(operators.ADD)}
                 />
             <Button display='='
                 className='operatorButton'

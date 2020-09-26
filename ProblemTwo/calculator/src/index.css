@@ -25,6 +25,10 @@ body {
     color: black;
 }
 
+.wideButton{
+    width: calc(50% + 2px);
+}
+
 .numberPad{
     width: 100%;
 }
@@ -37,4 +41,7 @@ body {
 .display{
     font-size: 90px;
     color:white;
+    text-align: right;
+    padding: 50px 25px 10px 25px;
+    
 }
