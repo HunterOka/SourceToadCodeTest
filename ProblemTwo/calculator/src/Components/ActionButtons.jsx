@@ -5,7 +5,7 @@ import Button from './Button.jsx'
 
 function ActionButtons(props){
 
-    return <div className='actionButtons'>
+    return <div className='actionButtons buttonRow'>
         {props.children}
     </div>
 }

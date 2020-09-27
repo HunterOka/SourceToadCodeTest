@@ -2,7 +2,7 @@ import React from 'react'
 
 function Display(props){
 return <div className='display'>
-    {props.value}
+    <span className='displayContent'>{props.value}</span>
 </div>
 }
 

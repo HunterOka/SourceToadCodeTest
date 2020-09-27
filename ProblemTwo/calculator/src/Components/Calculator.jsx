@@ -27,7 +27,6 @@ function Calculator(props) {
     
     const addDigit = (digit) => {
         if (activeValue.includes('e') || activeValue.length >= MAXDIGITS){
-            //TODO: show some kind of error?
             return
         }
         
@@ -100,7 +99,9 @@ function Calculator(props) {
     }
     
     const invert = () => {
-        setIsNegative(!isNegative)
+        if(getActiveNumber() != 0) {
+            setIsNegative(!isNegative)
+        }
     }
     
     const percent = () => {
@@ -122,20 +123,22 @@ function Calculator(props) {
     
     return <div>
     <Display value={getDisplayValue()} />
-        <div>
-            <ActionButtons>
-                <Button display='AC'
-                onClick={()=>clear()}
-                />
-                <Button display='&#x207a;&#x2044;&#x208b;'
-                onClick={()=>invert()}
-                />
-                <Button display='%'
-                onClick={()=>percent()}
-                />
-            </ActionButtons>
+        <div class='buttonContainer'>
+            <div class='leftButtons'>
+                <ActionButtons>
+                    <Button display='AC'
+                    onClick={()=>clear()}
+                    />
+                    <Button display='&#x207a;&#x2044;&#x208b;'
+                    onClick={()=>invert()}
+                    />
+                    <Button display='%'
+                    onClick={()=>percent()}
+                    />
+                </ActionButtons>
+                <NumberPad buttonClick={(x)=>addDigit(x)}/>
+            </div>
             <OperatorButtons buttonClick={resolveOperator}/>
-            <NumberPad buttonClick={(x)=>addDigit(x)}/>
         </div>
     </div>
 }

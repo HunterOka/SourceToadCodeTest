@@ -29,7 +29,10 @@ function Multiply(a, b){
 }
 
 function Divide(a, b){
-    return a / b;
+    if(b != 0){
+        return a / b;
+    }
+    return 0;
 }
 
 export {operators, getOperation}

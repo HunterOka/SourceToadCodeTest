@@ -4,20 +4,19 @@ import PropTypes from 'prop-types';
 import Button from './Button.jsx'
 
 function NumberPad(props){
-
-    return <div className='numberPad'>
+    return <React.Fragment>
         <div className='buttonRow'>
-            <Button display='1'
+            <Button display='7'
                 className={props.buttonClass}
-                onClick={()=>props.buttonClick(1)}
+                onClick={()=>props.buttonClick(7)}
                 />
-            <Button display='2'
+            <Button display='8'
                 className={props.buttonClass}
-                onClick={()=>props.buttonClick(2)}
+                onClick={()=>props.buttonClick(8)}
                 />
-            <Button display='3'
+            <Button display='9'
                 className={props.buttonClass}
-                onClick={()=>props.buttonClick(3)}
+                onClick={()=>props.buttonClick(9)}
                 />
         </div>
         <div className='buttonRow'>
@@ -34,18 +33,19 @@ function NumberPad(props){
                 onClick={()=>props.buttonClick(6)}
                 />
         </div>
+        
         <div className='buttonRow'>
-            <Button display='7'
+            <Button display='1'
                 className={props.buttonClass}
-                onClick={()=>props.buttonClick(7)}
+                onClick={()=>props.buttonClick(1)}
                 />
-            <Button display='8'
+            <Button display='2'
                 className={props.buttonClass}
-                onClick={()=>props.buttonClick(8)}
+                onClick={()=>props.buttonClick(2)}
                 />
-            <Button display='9'
+            <Button display='3'
                 className={props.buttonClass}
-                onClick={()=>props.buttonClick(9)}
+                onClick={()=>props.buttonClick(3)}
                 />
         </div>
         <div className='buttonRow'>
@@ -59,7 +59,7 @@ function NumberPad(props){
                 />
             
         </div>
-    </div>
+    </React.Fragment>
 }
 
 NumberPad.propTypes = {
