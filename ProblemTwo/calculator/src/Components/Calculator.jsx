@@ -33,16 +33,19 @@ function Calculator(props) {
         setCalcComplete(false);
         setNewInput(false);
         
+        //Don't allow to long inputs
         if (!newInput && (activeValue.includes('e') || activeValue.length >= MAXDIGITS)){
             setMessage(messages.TOOMANYDIGITS);
             return
         }
         
+        //Don't allow multiple '.'
         if (digit === '.' && activeValue.includes('.')){
             return
         }
         
-        if(calcComplete) {//The last thing hit was '=', clear all the stored values.
+        //If the last thing hit was '=', clear all the stored values.
+        if(calcComplete) {
             clear();
         }
         
@@ -69,8 +72,8 @@ function Calculator(props) {
     
     const resolveOperator = (newOperator) => {
         let result;
-        setCalcComplete(false);//If we pressed an operation, we want to keep calculating
-        if(newOperator == operators.EQUAL) {
+        setCalcComplete(false);//If we pressed an operation after '=', we want to keep calculating
+        if(newOperator == operators.EQUAL) { //Handle '='
             if(storedNumber !== null){
                 if (!calcComplete){
                     result = calculate(storedNumber, getActiveNumber(), operator);
@@ -82,7 +85,7 @@ function Calculator(props) {
                 handleResult(result);
                 setCalcComplete(true);
             }
-        } else {
+        } else {//Handle other operators
             if(!newInput && storedNumber !== null){
                 result = calculate(storedNumber, getActiveNumber(), operator);
                 handleResult(result);
@@ -90,15 +93,18 @@ function Calculator(props) {
             } else {
                 setStoredNumber(getActiveNumber())
             }
-         setOperator(newOperator)
-         
+         setOperator(newOperator)    
         }
         setNewInput(true)
     }
     
     const handleResult = (result) => {
-        setIsNegative(result < 0)
-        setActiveValue(Math.abs(result).toString())
+        if(result === 0) {
+            setIsNegative(false);
+        }
+        var abs = Math.abs(result)
+        var displayNum = abs > Math.pow(10,MAXDIGITS) ? abs.toExponential(MAXDIGITS-4) : abs.toString();
+        setActiveValue(displayNum);
     }
     
     const clear = () => {
