@@ -64,7 +64,7 @@ function NumberPad(props){
 
 NumberPad.propTypes = {
     buttonClass: PropTypes.string,
-    buttonClick: PropTypes.func,
+    buttonClick: PropTypes.func.isRequired,
 }
 
 export default NumberPad;

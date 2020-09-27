@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Button from './Button.jsx'
-import {operators} from './../operations.js'
+import {operators} from './../Constants/operations.js'
 
 function OperatorButtons(props){
 
@@ -33,7 +33,7 @@ function OperatorButtons(props){
 }
 
 OperatorButtons.propTypes = {
-    buttonClick: PropTypes.func,
+    buttonClick: PropTypes.func.isRequired,
 }
 
 export default OperatorButtons;

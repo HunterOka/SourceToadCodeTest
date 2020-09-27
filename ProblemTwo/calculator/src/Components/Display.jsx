@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 
 function Display(props){
     let bigValue=false;
@@ -6,9 +7,13 @@ function Display(props){
         bigValue = true;
     }
     const className = `display${bigValue ? ' bigValue' :''}`;
-return <div className={className}>
-    <span className='displayContent'>{props.value}</span>
-</div>
+    return <div className={className}>
+        <span className='displayContent'>{props.value}</span>
+    </div>
+}
+
+Display.propTypes = {
+    value: PropTypes.string,
 }
 
 export default Display

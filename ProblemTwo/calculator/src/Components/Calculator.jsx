@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import {operators, getOperation} from './../operations.js'
-import {messages} from './../messages.js'
+import {operators, getOperation} from './../Constants/operations.js'
+import {messages} from './../Constants/messages.js'
 import NumberPad from './NumberPad.jsx'
 import Button from './Button.jsx'
 import OperatorButtons from './OperatorButtons.jsx'
@@ -73,7 +72,7 @@ function Calculator(props) {
     const resolveOperator = (newOperator) => {
         let result;
         setCalcComplete(false);//If we pressed an operation after '=', we want to keep calculating
-        if(newOperator == operators.EQUAL) { //Handle '='
+        if(newOperator === operators.EQUAL) { //Handle '='
             if(storedNumber !== null){
                 if (!calcComplete){
                     result = calculate(storedNumber, getActiveNumber(), operator);
@@ -117,7 +116,7 @@ function Calculator(props) {
     }
     
     const invert = () => {
-        if(getActiveNumber() != 0) {
+        if(getActiveNumber() !== 0) {
             setIsNegative(!isNegative)
         }
     }

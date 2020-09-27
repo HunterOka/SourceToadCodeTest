@@ -31,7 +31,7 @@ function Multiply(a, b){
 }
 
 function Divide(a, b){
-    if(b != 0){
+    if(b !== 0){
         return a / b;
     }
     return messages.DIVIDEBYZERO;
