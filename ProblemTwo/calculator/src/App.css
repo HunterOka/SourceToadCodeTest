@@ -1,0 +1,170 @@
+body {
+  margin: 0;
+  font-family:'Source Sans Pro', sans-serif;
+}
+
+.container {
+    margin: auto;
+    max-width: 750px;
+    background-color: #202020;
+}
+
+.button{
+    position: relative;
+    display: inline-block;
+    border: 1px solid black;  
+    
+    background-color: #d5d6d8;
+
+}
+
+.button:after {
+    box-sizing: border-box;
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.buttonContent{
+    display: block;
+    position: absolute;
+    width: 100%;
+    top: 20%;
+    height: 50%;
+    text-align: center;
+    font-size: 80px;
+    font-weight: 100;
+    color: black;
+
+}
+
+@media only screen and (max-width: 750px) {
+  .buttonContent{
+        top: 20%;
+      font-size: 60px;
+    }
+}
+
+.operatorButton{
+    background-color: #f98e12;
+    
+}
+
+.operatorButton .buttonContent {
+    color: white;
+}
+
+.display{
+    font-size: 170px;
+    font-weight: 100;
+    color:white;
+    text-align: right;
+    padding: 0px 25px 0px 25px;
+    height: 300px;
+    display: flex;
+    
+}
+
+.displayContent{
+    width: 100%;
+    display: inline-flex;
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.bigValue{
+    font-size: 120px;
+}
+
+@media only screen and (max-width: 750px) {
+  .display{
+        height: 180px;
+        font-size: 100px;
+    }
+    
+    .bigValue{
+        font-size: 80px;
+    }
+}
+
+.buttonContainer{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    border: 1px solid black;
+}
+
+.actionButtons {
+    display: flex;
+}
+
+.buttonRow{
+    display: flex;
+    justify-content: space-around;
+}
+
+.actionsButtons{
+    
+}
+
+.leftButtons{
+    width: 75%;
+}
+
+.leftButtons .button{
+    width: 33%;
+}
+
+.leftButtons .wideButton{
+
+    width: calc(66% + 2px);
+}
+
+.leftButtons .wideButton:after {
+  content: "";
+  display: block;
+  padding-bottom: 0%;
+}
+
+.leftButtons .wideButton .buttonContent{
+    text-align: left;
+    padding-left: 20%;
+}
+
+.operatorButtons{
+    width: 25%;
+}
+
+.operatorButtons .button{
+    width: calc(100% - 2px);
+}
+
+.buttonCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.noSelect {
+    user-select: none; 
+   -webkit-user-select: none; 
+   -moz-user-select: none;
+   -ms-user-select: none;   
+}
+
+.messagePopup {
+    position: absolute;
+    background-color: gray;
+    opacity: 75%;
+    color: white;
+    width: 75%;
+    top: 30px;
+    max-width: 600px;
+    margin-top: 55px;
+    border-radius: 10px;
+    padding: 5px;
+    display: block;
+    text-align: center;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
