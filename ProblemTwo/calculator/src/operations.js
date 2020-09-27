@@ -1,3 +1,5 @@
+import {messages} from './messages.js'
+
 const operators = {
     ADD: 'ADD',
     SUBTRACT: 'SUBTRACT',
@@ -32,7 +34,7 @@ function Divide(a, b){
     if(b != 0){
         return a / b;
     }
-    return 0;
+    return messages.DIVIDEBYZERO;
 }
 
 export {operators, getOperation}

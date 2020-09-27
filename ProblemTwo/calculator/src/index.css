@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family:'Helvetica Neue', sans-serif;
+  font-family:'Source Sans Pro', sans-serif;
 }
 
 .container {
@@ -35,6 +35,13 @@ body {
     font-size: 60px;
     font-weight: 100;
     color: black;
+
+}
+
+@media only screen and (max-width: 750px) {
+  .buttonContent{
+        top: 20%;
+    }
 }
 
 .operatorButton{
@@ -62,6 +69,13 @@ body {
     display: inline-flex;
     align-self: flex-end;
     flex-direction: row-reverse;
+}
+
+@media only screen and (max-width: 750px) {
+  .display{
+    height: 180px;
+    font-size: 100px;
+    }
 }
 
 .buttonContainer{
@@ -104,7 +118,7 @@ body {
 
 .leftButtons .wideButton .buttonContent{
     text-align: left;
-    padding-left: 10%;
+    padding-left: 20%;
 }
 
 .operatorButtons{
@@ -120,4 +134,27 @@ body {
     flex-direction: column;
 }
 
+.noSelect {
+    user-select: none; 
+   -webkit-user-select: none; 
+   -moz-user-select: none;
+   -ms-user-select: none;   
+}
 
+.messagePopup {
+    position: absolute;
+    background-color: gray;
+    opacity: 75%;
+    color: white;
+    width: 75%;
+    top: 30px;
+    max-width: 600px;
+    margin-top: 55px;
+    border-radius: 10px;
+    padding: 5px;
+    display: block;
+    text-align: center;
+    left: 0;
+    right: 0;
+    margin: auto;
+}

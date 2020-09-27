@@ -2,15 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {operators, getOperation} from './../operations.js'
+import {messages} from './../messages.js'
 import NumberPad from './NumberPad.jsx'
 import Button from './Button.jsx'
 import OperatorButtons from './OperatorButtons.jsx'
 import ActionButtons from './ActionButtons.jsx'
 import Display from './Display.jsx'
+import MessagePopup from './MessagePopup.jsx'
 
 
 function Calculator(props) {
-    const MAXDIGITS=12;
+    const MAXDIGITS=8;
     
     //Store the active number as a string for easy concatenation
     const [activeValue, setActiveValue] = React.useState('0');
@@ -25,8 +27,14 @@ function Calculator(props) {
     //Tracks if the last operation complete was '='
     const [calcComplete, setCalcComplete] =  React.useState(false);
     
+    const [message, setMessage] = React.useState(null);
+    
     const addDigit = (digit) => {
-        if (activeValue.includes('e') || activeValue.length >= MAXDIGITS){
+        setCalcComplete(false);
+        setNewInput(false);
+        
+        if (!newInput && (activeValue.includes('e') || activeValue.length >= MAXDIGITS)){
+            setMessage(messages.TOOMANYDIGITS);
             return
         }
         
@@ -39,20 +47,24 @@ function Calculator(props) {
         }
         
         if (activeValue === '0' || newInput){
+            setIsNegative(false);
             setActiveValue(digit.toString());
         } else {
             setActiveValue(activeValue+digit);     
         }
         
-        setCalcComplete(false);
-        setNewInput(false);
+        
     }
     
     const calculate = (a, b, operator) => {
         //Execute the function associated with the operation 
         let result = getOperation(operator)(a, b);
-        result = roundToMax(result)
-        return result 
+        if(typeof result !== 'number'){
+            setMessage(result);
+            return 0;
+        }
+        result = roundToMax(result);
+        return result;
     }
     
     const resolveOperator = (newOperator) => {
@@ -121,24 +133,32 @@ function Calculator(props) {
         return  (isNegative ? '-':'') + activeValue;  
     }
     
+    const pressButton = (action) => {
+        setMessage(null);
+        action()
+    }
+    
     return <div>
+        {message &&
+        <MessagePopup message={message} />
+        }
     <Display value={getDisplayValue()} />
-        <div class='buttonContainer'>
-            <div class='leftButtons'>
+        <div className='buttonContainer'>
+            <div className='leftButtons'>
                 <ActionButtons>
                     <Button display='AC'
-                    onClick={()=>clear()}
+                    onClick={()=>{pressButton(clear)}}
                     />
                     <Button display='&#x207a;&#x2044;&#x208b;'
-                    onClick={()=>invert()}
+                    onClick={()=>pressButton(invert)}
                     />
                     <Button display='%'
-                    onClick={()=>percent()}
+                    onClick={()=>pressButton(percent)}
                     />
                 </ActionButtons>
-                <NumberPad buttonClick={(x)=>addDigit(x)}/>
+                <NumberPad buttonClick={(x)=>{pressButton(()=>{addDigit(x)})}}/>
             </div>
-            <OperatorButtons buttonClick={resolveOperator}/>
+            <OperatorButtons buttonClick={(op)=>pressButton(()=>{resolveOperator(op)})}/>
         </div>
     </div>
 }
